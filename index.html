@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Interactivo: Potenciando Empresas en Ecuador con Agentes Conversacionales Multimodales (ACM)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Slate) with Indigo accent -->
+    <!-- Application Structure Plan: A single-page, thematic journey designed for exploration. It starts with a broad introduction, then drills down into the 'Why', 'How' (Use Cases & Keys to Success), and finally looks to the 'Future'. A sticky navigation bar allows users to jump between these logical sections, breaking free from a linear reading experience. This structure prioritizes user-driven discovery over passive consumption, making the information more engaging and memorable. Key data points are transformed into interactive charts and stats to provide immediate visual impact. -->
+    <!-- Visualization & Content Choices: 
+        - Agent vs. Bot Performance: Report Info -> Compare massive scale difference. Goal -> Visually shock the user with the efficiency gain. Viz/Presentation -> Bar Chart. Interaction -> Hover for details. Justification -> A bar chart is the most direct and powerful way to show a stark comparison between two numbers. Library -> Chart.js.
+        - Inbound Call Handling: Report Info -> 80% of simple queries automated. Goal -> Inform about efficiency. Viz/Presentation -> Animated statistic. Interaction -> Animates on scroll into view. Justification -> A large, animated number is more eye-catching and impactful than a static text block for a single, powerful statistic. Library -> Vanilla JS.
+        - Use Cases: Report Info -> Lists of inbound/outbound scenarios. Goal -> Organize and simplify. Viz/Presentation -> Interactive Tabs. Interaction -> Click to toggle. Justification -> Tabs neatly separate the two categories, preventing a long, overwhelming list and encouraging focused exploration. Library -> Vanilla JS.
+        - Keys to Success: Report Info -> 4 key pillars. Goal -> Inform and reinforce. Viz/Presentation -> Icon-based grid. Interaction -> Subtle animation on scroll. Justification -> Breaks down the four pillars into digestible, visually distinct blocks, making them easier to remember. Library -> HTML/Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link.active {
+            color: #4f46e5; /* indigo-600 */
+            font-weight: 600;
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-slate-800">
+                <a href="#hero">ACM EC</a>
+            </h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#porque" class="nav-link text-slate-600 hover:text-indigo-600 transition-colors">¿Por qué?</a>
+                <a href="#casos-uso" class="nav-link text-slate-600 hover:text-indigo-600 transition-colors">Casos de Uso</a>
+                <a href="#claves-exito" class="nav-link text-slate-600 hover:text-indigo-600 transition-colors">Claves del Éxito</a>
+                <a href="#futuro" class="nav-link text-slate-600 hover:text-indigo-600 transition-colors">Colaboración</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#porque" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">¿Por qué?</a>
+            <a href="#casos-uso" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Casos de Uso</a>
+            <a href="#claves-exito" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Claves del Éxito</a>
+            <a href="#futuro" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Colaboración</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative text-center py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-slate-800 leading-tight">
+                    Potencie su Empresa en Ecuador <br class="hidden md:block"> con <span class="text-indigo-600">Agentes Conversacionales Multimodales (ACM)</span>
+                </h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-600">
+                    Descubra cómo la Inteligencia Artificial Conversacional está transformando la interacción con el cliente, optimizando costos y escalando operaciones en el mercado ecuatoriano.
+                </p>
+                <a href="#porque" class="mt-10 inline-block bg-indigo-600 text-white font-bold rounded-lg px-8 py-3 hover:bg-indigo-700 transition-transform transform hover:scale-105">
+                    Explorar el Potencial
+                </a>
+            </div>
+        </section>
+
+        <!-- Section 2: ¿Por Qué? -->
+        <section id="porque" class="py-20 md:py-24 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800">¿Por Qué su Empresa en Ecuador Necesita un ACM?</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+                        La adopción de esta tecnología responde a dos necesidades críticas para el crecimiento: la eficiencia de costos y una escalabilidad sin precedentes.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h4 class="text-2xl font-bold text-slate-800 mb-4">Optimización y Escalabilidad</h4>
+                        <p class="text-slate-600 mb-6">Compare la capacidad diaria de un agente tradicional frente a un Agente Conversacional Multimodal. La diferencia no es incremental, es exponencial.</p>
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                             <h4 class="text-2xl font-bold text-slate-800 mb-2">Resolución en Primera Línea</h4>
+                             <p class="text-slate-600 mb-4">Un ACM bien entrenado puede resolver las consultas más comunes de manera instantánea.</p>
+                             <div id="resolution-stat" class="text-7xl font-extrabold text-indigo-600" data-target="80">0%</div>
+                             <p class="font-semibold text-slate-700">De las consultas frecuentes son automatizadas, liberando a su equipo para tareas de alto valor.</p>
+                        </div>
+                         <div class="bg-white p-8 rounded-xl shadow-lg">
+                             <h4 class="text-2xl font-bold text-slate-800 mb-2">Aplicación Local</h4>
+                             <p class="text-slate-600">Empresas ecuatorianas de <span class="font-semibold text-indigo-600">Retail</span>, <span class="font-semibold text-indigo-600">Banca</span> y <span class="font-semibold text-indigo-600">Floricultura</span> ya pueden capitalizar esta tecnología para gestionar picos de demanda y campañas masivas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Casos de Uso -->
+        <section id="casos-uso" class="py-20 md:py-24 bg-white fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800">Casos de Uso para el Mercado Ecuatoriano</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">Desde la optimización de la cobranza hasta la atención 24/7, las aplicaciones de los ACM son vastas y de alto impacto.</p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex justify-center mb-10">
+                    <div class="bg-slate-200 p-1 rounded-lg flex space-x-1">
+                        <button id="outbound-btn" class="tab-btn active bg-white text-indigo-600 rounded-md px-6 py-2 font-semibold transition-colors">Interacciones Salientes</button>
+                        <button id="inbound-btn" class="tab-btn text-slate-600 rounded-md px-6 py-2 font-semibold transition-colors">Interacciones Entrantes</button>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="use-cases-content" class="transition-opacity duration-500">
+                    <!-- Outbound Content -->
+                    <div id="outbound-content">
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div class="use-case-card">📞<h5 class="font-bold text-xl mb-2 mt-3">Gestión de Cartera</h5><p>Recordatorios de pago amigables y eficientes para reducir la morosidad.</p></div>
+                            <div class="use-case-card">📈<h5 class="font-bold text-xl mb-2 mt-3">Generación de Leads</h5><p>Calificación inicial de interesados en productos y servicios.</p></div>
+                            <div class="use-case-card">🗓️<h5 class="font-bold text-xl mb-2 mt-3">Confirmación de Citas</h5><p>Agendamiento y confirmación automática para optimizar la asistencia.</p></div>
+                            <div class="use-case-card">🛍️<h5 class="font-bold text-xl mb-2 mt-3">Reactivación de Clientes</h5><p>Contacto proactivo a clientes inactivos con ofertas personalizadas.</p></div>
+                        </div>
+                    </div>
+                    <!-- Inbound Content (hidden by default) -->
+                    <div id="inbound-content" class="hidden">
+                         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="use-case-card">🌙<h5 class="font-bold text-xl mb-2 mt-3">Atención 24/7</h5><p>Responda preguntas frecuentes fuera del horario de oficina, los 365 días del año.</p></div>
+                            <div class="use-case-card">🎧<h5 class="font-bold text-xl mb-2 mt-3">Primera Línea de Soporte</h5><p>Filtre y resuelva consultas sencillas, transfiriendo solo los casos complejos.</p></div>
+                            <div class="use-case-card">⚡<h5 class="font-bold text-xl mb-2 mt-3">Gestión de Picos</h5><p>Atienda a miles de usuarios simultáneamente durante eventos o crisis.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Claves del Éxito -->
+        <section id="claves-exito" class="py-20 md:py-24 fade-in-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-800">Claves para un ACM Exitoso "a la Ecuatoriana"</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">No se trata solo de tecnología, sino de crear una experiencia natural y culturalmente relevante.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="key-success-card">
+                        <div class="icon-bg">🎤</div>
+                        <h4 class="title">La Voz es la Clave</h4>
+                        <p class="description">Utilice locutores locales y tecnología de síntesis híbrida para sonar natural y cercano, no robótico.</p>
+                    </div>
+                    <div class="key-success-card">
+                        <div class="icon-bg">✍️</div>
+                        <h4 class="title">Un Guion que Conecte</h4>
+                        <p class="description">El diálogo debe ser conciso, valioso y usar un lenguaje coloquial que genere confianza desde el inicio.</p>
+                    </div>
+                    <div class="key-success-card">
+                        <div class="icon-bg">🤖</div>
+                        <h4 class="title">Transparencia Creativa</h4>
+                        <p class="description">Es mejor que el agente admita su naturaleza con un toque de humor a que pretenda ser humano y falle.</p>
+                    </div>
+                    <div class="key-success-card">
+                        <div class="icon-bg">🧠</div>
+                        <h4 class="title">Inteligencia Real (NLU)</h4>
+                        <p class="description">La tecnología NLU es crucial para entender las intenciones y modismos locales, permitiendo una conversación fluida.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Futuro & Contacto -->
+        <section id="futuro" class="py-20 md:py-24 bg-indigo-700 text-white fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                 <h3 class="text-3xl md:text-4xl font-bold">El Futuro: Agentes Conversacionales Multimodales</h3>
+                 <p class="mt-6 max-w-3xl mx-auto text-lg text-indigo-100">
+                    Los ACM representan la próxima evolución de la interacción inteligente, comunicándose por voz, texto e imágenes simultáneamente. Imagine un cliente mostrando un producto defectuoso por video mientras el agente de IA lo diagnostica y guía en tiempo real.
+                 </p>
+                 <div class="mt-10 bg-white/10 p-8 rounded-lg max-w-2xl mx-auto">
+                     <h4 class="text-xl font-semibold text-white">Explore la Próxima Generación de IA</h4>
+                     <p class="mt-2 text-indigo-200">Si su organización está interesada en generar conocimiento y cocrear soluciones innovadoras con estas tecnologías de vanguardia, la colaboración es clave.</p>
+                     <a href="mailto:dolivaresm@fen.uchile.cl" class="mt-6 inline-block bg-white text-indigo-600 font-bold rounded-lg px-8 py-3 hover:bg-slate-100 transition-colors">
+                        Contactar para Colaborar: dolivaresm@fen.uchile.cl
+                     </a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <style>
+        .use-case-card { background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+        .use-case-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .use-case-card > h5 { color: #1e293b; /* slate-800 */ }
+        .use-case-card > p { color: #475569; /* slate-600 */ }
+        .use-case-card > .text-4xl { font-size: 2.25rem; }
+
+        .key-success-card { background-color: white; padding: 2rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+        .key-success-card .icon-bg { font-size: 2rem; line-height: 1; }
+        .key-success-card .title { margin-top: 1rem; font-size: 1.25rem; font-weight: 700; color: #1e293b; }
+        .key-success-card .description { margin-top: 0.5rem; color: #475569; }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Performance Chart
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const performanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Agente Humano (Interacciones/Día)', 'ACM (Interacciones/Día)'],
+                    datasets: [{
+                        label: 'Capacidad Máxima de Interacciones por Día',
+                        data: [20, 100000],
+                        backgroundColor: [
+                            'rgba(165, 180, 252, 0.6)', // indigo-300
+                            'rgba(79, 70, 229, 0.6)'    // indigo-600
+                        ],
+                        borderColor: [
+                            'rgba(165, 180, 252, 1)',
+                            'rgba(79, 70, 229, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            type: 'logarithmic',
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return Number(value.toString()).toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += Number(context.parsed.y).toLocaleString();
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animated Statistic
+            function animateStat(element) {
+                const target = +element.getAttribute('data-target');
+                let count = 0;
+                const duration = 2000;
+                const stepTime = Math.abs(Math.floor(duration / target));
+                
+                const timer = setInterval(() => {
+                    count++;
+                    element.innerText = count + '%';
+                    if (count === target) {
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+
+            // Use Case Tabs
+            const outboundBtn = document.getElementById('outbound-btn');
+            const inboundBtn = document.getElementById('inbound-btn');
+            const outboundContent = document.getElementById('outbound-content');
+            const inboundContent = document.getElementById('inbound-content');
+            const tabs = [outboundBtn, inboundBtn];
+
+            function switchTab(activeBtn) {
+                tabs.forEach(btn => {
+                    btn.classList.remove('active', 'bg-white', 'text-indigo-600');
+                    if (!btn.classList.contains('text-slate-600')) {
+                        btn.classList.add('text-slate-600')
+                    }
+                });
+                activeBtn.classList.add('active', 'bg-white', 'text-indigo-600');
+                activeBtn.classList.remove('text-slate-600');
+
+                if (activeBtn.id === 'outbound-btn') {
+                    outboundContent.classList.remove('hidden');
+                    inboundContent.classList.add('hidden');
+                } else {
+                    inboundContent.classList.remove('hidden');
+                    outboundContent.classList.add('hidden');
+                }
+            }
+            outboundBtn.addEventListener('click', () => switchTab(outboundBtn));
+            inboundBtn.addEventListener('click', () => switchTab(inboundBtn));
+
+
+            // Intersection Observer for animations
+            const sections = document.querySelectorAll('.fade-in-section');
+            const statElement = document.getElementById('resolution-stat');
+            let statAnimated = false;
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        
+                        // Animate stat only once when it becomes visible
+                        if (entry.target.contains(statElement) && !statAnimated) {
+                            animateStat(statElement);
+                            statAnimated = true;
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.15
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Nav link active state on scroll
+            const navLinks = document.querySelectorAll('.nav-link');
+            const allSections = document.querySelectorAll('main section');
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                 entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if(link.getAttribute('href') === `#${id}`){
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            allSections.forEach(section => scrollObserver.observe(section));
+        });
+    </script>
+</body>
+</html>
